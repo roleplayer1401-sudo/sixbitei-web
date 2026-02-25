@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIXBITE</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* ===== NAVBAR ===== */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    background:rgba(0,0,0,0.8);
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+
+header h1{
+    color:white;
+}
+
+nav a{
+    color:white;
+    margin-left:20px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#25D366;
+}
+
+/* ===== HERO ===== */
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url('https://via.placeholder.com/1600x900');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h2{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.btn{
+    padding:12px 25px;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    display:inline-block;
+    margin:10px 5px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+.btn-wa{background:#25D366;}
+.btn-ig{background:#E1306C;}
+
+/* ===== SECTION ===== */
+section{
+    padding:100px 5%;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.products{
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    justify-content:center;
+}
+
+.card{
+    background:white;
+    width:280px;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.card h3{
+    padding:10px;
+}
+
+.price{
+    color:green;
+    font-weight:bold;
+    padding:0 10px 10px;
+}
+
+/* ===== ANIMASI ===== */
+.animate{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 0.8s ease;
+}
+
+.animate.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.slide-left{transform:translateX(-60px);}
+.slide-right{transform:translateX(60px);}
+.slide-left.show,
+.slide-right.show{
+    transform:translateX(0);
+}
+
+/* ===== FOOTER ===== */
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+@media(max-width:768px){
+    .hero h2{font-size:30px;}
+    nav{display:none;}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>SIXBITE MART</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#produk">Produk</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#kontak">Kontak</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero animate" id="home">
+    <div>
+        <h2>Produk Berkualitas & Harga Terbaik</h2>
+        <a href="#produk" class="btn btn-wa">Lihat Produk</a>
+        <a href="https://instagram.com/mylsie_" target="_blank" class="btn btn-ig">Instagram</a>
+    </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk">
+    <div class="container">
+        <h2 class="animate" style="text-align:center;margin-bottom:40px;">Produk Kami</h2>
+        <div class="products">
+
+            <!-- Produk 1 -->
+            <div class="card animate slide-left">
+                <img src="G1.jpeg" alt="" style="cursor:pointer;" onclick="openModal('Produk 1','150000')">
+                <h3>Produk 1</h3>
+                <p class="price">Rp150.000</p>
+            </div>
+
+            <!-- Produk 2 -->
+            <div class="card animate">
+                <img src="G2.jpeg" alt="" style="cursor:pointer;" onclick="openModal('Produk 2','200000')">
+                <h3>Produk 2</h3>
+                <p class="price">Rp200.000</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Modal / Popup -->
+<div id="productModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:2000;">
+    <div style="background:white;padding:20px;border-radius:10px;max-width:400px;width:90%;position:relative;">
+        <span style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:20px;" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle"></h3>
+        <p id="modalPrice" style="color:green;font-weight:bold;"></p>
+
+        <!-- Pilih varian saus -->
+        <p>Pilih Saus:</p>
+        <label><input type="radio" name="modalSaus" value="Saus Pedas" checked> Saus Pedas</label>
+        <label><input type="radio" name="modalSaus" value="Saus Keju"> Saus Keju</label>
+
+        <!-- Jumlah -->
+        <div style="display:flex;align-items:center;margin-top:10px;">
+            <button onclick="decrementQtyModal()">-</button>
+            <input type="number" id="modalQty" value="1" min="1" style="width:50px;text-align:center;margin:0 5px;" readonly>
+            <button onclick="incrementQtyModal()">+</button>
+        </div>
+
+        <!-- Pesan WA -->
+        <a id="modalOrderBtn" href="#" target="_blank" style="display:block;margin-top:20px;padding:10px;text-align:center;background:#25D366;color:white;border-radius:10px;text-decoration:none;">
+            Pesan via WhatsApp
+        </a>
+    </div>
+</div>
+
+<script>
+let currentProduct = '';
+let currentPrice = 0;
+
+function openModal(productName, price){
+    currentProduct = productName;
+    currentPrice = price;
+    document.getElementById('modalTitle').innerText = productName;
+    document.getElementById('modalPrice').innerText = 'Rp' + parseInt(price).toLocaleString();
+    document.getElementById('modalQty').value = 1;
+
+    updateWAButton();
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+function closeModal(){
+    document.getElementById('productModal').style.display = 'none';
+}
+
+function incrementQtyModal(){
+    const input = document.getElementById('modalQty');
+    input.value = parseInt(input.value) + 1;
+    updateWAButton();
+}
+
+function decrementQtyModal(){
+    const input = document.getElementById('modalQty');
+    if(parseInt(input.value) > 1){
+        input.value = parseInt(input.value) - 1;
+        updateWAButton();
+    }
+}
+
+function updateWAButton(){
+    const qty = document.getElementById('modalQty').value;
+    const saus = document.querySelector('input[name="modalSaus"]:checked').value;
+    const text = `Saya ingin memesan ${currentProduct} (${saus}) sebanyak ${qty} pcs.`;
+    const waLink = 'https://wa.me/6281234567890?text=' + encodeURIComponent(text);
+    document.getElementById('modalOrderBtn').href = waLink;
+}
+
+// Update WA ketika ganti saus
+document.querySelectorAll('input[name="modalSaus"]').forEach(el=>{
+    el.addEventListener('change', updateWAButton);
+});
+</script>
+
+              
+
+<script>
+function incrementQty(button){
+    const input = button.parentElement.querySelector('input[type="number"]');
+    input.value = parseInt(input.value) + 1;
+}
+
+function decrementQty(button){
+    const input = button.parentElement.querySelector('input[type="number"]');
+    if(parseInt(input.value) > 1){
+        input.value = parseInt(input.value) - 1;
+    }
+}
+</script>
+<!-- TENTANG -->
+<section id="tentang" style="background:#fff;">
+    <div class="container animate">
+        <h2 style="text-align:center;margin-bottom:20px;">Tentang Kami</h2>
+        <p style="text-align:center;max-width:700px;margin:auto;">
+            Kami menyediakan produk berkualitas premium dengan harga terbaik.
+            Kepuasan pelanggan adalah prioritas utama kami.
+        </p>
+    </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+    <div class="container animate" style="text-align:center;">
+        <h2>Hubungi Kami</h2>
+        <br>
+        <a class="btn btn-wa" href="https://wa.me/6288989809992" target="_blank">
+            Chat WhatsApp
+        </a>
+        <a class="btn btn-ig" href="https://instagram.com/usernamekamu" target="_blank">
+            Instagram
+        </a>
+    </div>
+</section>
+
+<footer>
+    © 2026 Toko Kamu | All Rights Reserved
+</footer>
+
+<script>
+// Scroll Animation
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+},{threshold:0.2});
+
+document.querySelectorAll(".animate").forEach(el=>{
+    observer.observe(el);
+});
+</script>
+
+</body>
+</html>
